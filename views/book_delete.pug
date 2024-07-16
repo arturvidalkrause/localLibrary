@@ -1,0 +1,17 @@
+extends layout 
+
+block content 
+
+    h1 #{title}: #{book.title}
+
+    if book_status
+        p= book.sumary 
+
+        p Do you realy want to delete this Book?
+        form(method='POST')
+            div.form-group
+                input#bookid.from-control(type='hidden', name='bookid', value=book._id)
+            
+            button.btn.btn-primary(type='submit') Delete
+    else
+        p #[strong The book #{book.title} cannot be deleted as it has been loaned]

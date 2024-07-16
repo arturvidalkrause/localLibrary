@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+    h1 #{title}: #{bookinstance.book.title}
+
+    p(style='margin-top: 30px; margin-bottom: 20px') #[strong Isbn of the book that the BookInstance references: #{bookinstance.book.isbn}]
+
+    if book_status
+        h3 Imprint
+        p= bookinstance.imprint 
+
+        p #[strong Status: ]
+            if bookinstance.status == 'Available'
+                span.text-success #{bookinstance.status}
+            else if bookinstance.status == 'Maintenance'
+                span.text-danger #{bookinstance.status}
+            else 
+                span.text-warning #{bookinstance.status}
+
+        p(style='margin-top: 40px') Do you realy want to delete this Book Instance?
+        form(method='POST')
+            div.form-group
+                input#bookid.from-control(type='hidden', name='bookinstance_id', value=bookinstance._id)
+            
+            button.btn.btn-primary(type='submit') Delete
+    else 
+        p #[strong The Book Instance #{bookinstance._id} cannot be delete as it a book has been loaned]

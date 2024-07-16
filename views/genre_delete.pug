@@ -1,0 +1,10 @@
+extends layout 
+
+block content
+
+    h1 #{title}: #{genre.name}
+    form(method='POST')
+        div.form-group
+            input#bookid.from-control(type='hidden', name='genre_id', value=genre._id)
+        
+        button.btn.btn-primary(type='submit') Delete

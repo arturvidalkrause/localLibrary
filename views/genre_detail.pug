@@ -1,0 +1,28 @@
+extends layout 
+
+block content
+
+    h1 Genre: #{genre.name}
+
+    div(style='margin-left: 20px; margin-top: 20px')
+    
+        h2(style='font-size: 1.5rem') Books 
+        if genre_books.length 
+            dl 
+                each book in genre_books
+                    hr
+                    dt(style='margin-bottom: 10px')
+                        a(href=book.url) #{book.title}
+                    dd #{book.summary}
+        else 
+            p  This genre has no books.
+            hr
+            p 
+                a(href=genre.url+'/delete') Genre Delete
+            p 
+                a(href=genre.url+'/update') Genre Update
+    
+    if errors
+        ul 
+            for error in errors 
+                li!= error.msg
